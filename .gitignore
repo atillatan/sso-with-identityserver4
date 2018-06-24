@@ -5,6 +5,5 @@
 *.o
 *.so
 .vs/
-.vscode/
 bin/
 obj/
