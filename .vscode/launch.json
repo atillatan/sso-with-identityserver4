@@ -2,7 +2,18 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": ".NET Core Launch (web)",
+            "name": "Debug Console Client",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-consoleapp",
+            "program": "${workspaceRoot}/Client/bin/Debug/netcoreapp2.0/Client.dll",
+            "args": [],
+            "cwd": "${workspaceRoot}",
+            "stopAtEntry": false,
+            "console": "internalConsole"
+        },
+        {
+            "name": "Debug SSO",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",

@@ -2,7 +2,7 @@
  * @Author: Atilla Tanrikulu 
  * @Date: 2018-04-16 10:10:45 
  * @Last Modified by: Atilla Tanrikulu
- * @Last Modified time: 2018-06-11 10:44:03
+ * @Last Modified time: 2018-06-25 10:50:09
  */
 using IdentityModel.Client;
 using Newtonsoft.Json.Linq;
@@ -19,7 +19,7 @@ namespace Client
         private static async Task MainAsync()
         {
            // discover endpoints from metadata
-            var disco = await DiscoveryClient.GetAsync("http://sso.mycompany.com");
+            var disco = await DiscoveryClient.GetAsync("http://localhost:5000");
             if (disco.IsError)
             {
                 Console.WriteLine(disco.Error);
@@ -28,7 +28,7 @@ namespace Client
 
             // request token
             var tokenClient = new TokenClient(disco.TokenEndpoint, "client", "*****");
-            var tokenResponse = await tokenClient.RequestResourceOwnerPasswordAsync("adminuser", "123", "core.service.api");
+            var tokenResponse = await tokenClient.RequestResourceOwnerPasswordAsync("adminuser", "123", "openid");
 
             if (tokenResponse.IsError)
             {

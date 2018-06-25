@@ -19,11 +19,11 @@ document.getElementById("api").addEventListener("click", api, false);
 document.getElementById("logout").addEventListener("click", logout, false);
 
 var config = {
-    authority: "https://sso.mycompany.com",
+    authority: "http://localhost:5000",
     client_id: "jsclient",
     redirect_uri: "http://localhost:5003/callback.html",
     response_type: "id_token token",
-    scope:"openid profile email role core.service.api alarm.service.api",
+    scope:"openid profile email role alarm.api",
     post_logout_redirect_uri : "https://sso.mycompany.com/Account/logout",
 };
 var mgr = new Oidc.UserManager(config);
