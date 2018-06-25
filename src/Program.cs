@@ -22,15 +22,31 @@ namespace SSO.Web
         {
             Console.Title = "SSO.Web";
 
-            BuildWebHost(args).Run();
+            Console.WriteLine(Directory.GetCurrentDirectory());
+
+            IWebHost webHost = new WebHostBuilder()
+            .UseKestrel()
+            .UseContentRoot(Directory.GetCurrentDirectory())
+            .ConfigureAppConfiguration(
+                (hostingContext, config) =>
+                {
+                    var env = hostingContext.HostingEnvironment;
+                    config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                          .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
+
+                    config.SetBasePath(env.ContentRootPath);
+                    config.AddEnvironmentVariables();
+                    config.AddCommandLine(args);
+                }
+            )
+            .UseUrls("http://localhost:5000")
+            .UseStartup<Startup>()
+            .Build();
+
+            webHost.Run();
         }
 
-        public static IWebHost BuildWebHost(string[] args)
-        {
-            return WebHost.CreateDefaultBuilder(args)
-                   .UseStartup<Startup>()
-                   .UseUrls("http://localhost:5000")                 
-                   .Build();
-        }
     }
 }
+
+
