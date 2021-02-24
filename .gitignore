@@ -7,3 +7,5 @@
 .vs/
 bin/
 obj/
+package-lock.json
+/../package-lock.json
